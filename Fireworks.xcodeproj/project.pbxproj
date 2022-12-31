@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3888021B29604D03006EF1C2 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3888021A29604D03006EF1C2 /* VisualEffectView.swift */; };
+		3888022A29606B96006EF1C2 /* sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3888022929606B96006EF1C2 /* sound.m4a */; };
 		38FC6A28295FD562008D9519 /* FireworksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC6A27295FD562008D9519 /* FireworksApp.swift */; };
 		38FC6A2A295FD562008D9519 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC6A29295FD562008D9519 /* ContentView.swift */; };
 		38FC6A2C295FD566008D9519 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FC6A2B295FD566008D9519 /* Assets.xcassets */; };
 		38FC6A2F295FD566008D9519 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FC6A2E295FD566008D9519 /* Preview Assets.xcassets */; };
+		38FC6A37295FD610008D9519 /* ParticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC6A36295FD610008D9519 /* ParticleCell.swift */; };
+		38FC6A39295FD711008D9519 /* FireworksContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC6A38295FD711008D9519 /* FireworksContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3888021A29604D03006EF1C2 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		3888022929606B96006EF1C2 /* sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.m4a; sourceTree = "<group>"; };
 		38FC6A24295FD562008D9519 /* Fireworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fireworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FC6A27295FD562008D9519 /* FireworksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworksApp.swift; sourceTree = "<group>"; };
 		38FC6A29295FD562008D9519 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		38FC6A2B295FD566008D9519 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38FC6A2E295FD566008D9519 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		38FC6A30295FD566008D9519 /* Fireworks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fireworks.entitlements; sourceTree = "<group>"; };
+		38FC6A36295FD610008D9519 /* ParticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleCell.swift; sourceTree = "<group>"; };
+		38FC6A38295FD711008D9519 /* FireworksContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworksContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,10 @@
 			children = (
 				38FC6A27295FD562008D9519 /* FireworksApp.swift */,
 				38FC6A29295FD562008D9519 /* ContentView.swift */,
+				38FC6A38295FD711008D9519 /* FireworksContainer.swift */,
+				38FC6A36295FD610008D9519 /* ParticleCell.swift */,
+				3888021A29604D03006EF1C2 /* VisualEffectView.swift */,
+				3888022929606B96006EF1C2 /* sound.m4a */,
 				38FC6A2B295FD566008D9519 /* Assets.xcassets */,
 				38FC6A30295FD566008D9519 /* Fireworks.entitlements */,
 				38FC6A2D295FD566008D9519 /* Preview Content */,
@@ -128,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38FC6A2F295FD566008D9519 /* Preview Assets.xcassets in Resources */,
+				3888022A29606B96006EF1C2 /* sound.m4a in Resources */,
 				38FC6A2C295FD566008D9519 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3888021B29604D03006EF1C2 /* VisualEffectView.swift in Sources */,
 				38FC6A2A295FD562008D9519 /* ContentView.swift in Sources */,
+				38FC6A37295FD610008D9519 /* ParticleCell.swift in Sources */,
+				38FC6A39295FD711008D9519 /* FireworksContainer.swift in Sources */,
 				38FC6A28295FD562008D9519 /* FireworksApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
