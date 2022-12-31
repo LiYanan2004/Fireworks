@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+#if os(macOS)
+typealias PlatformImage = NSImage
+#else
+typealias PlatformImage = UIImage
+#endif
+
 struct ContentView: View {
     @ObservedObject var container: FireworksContainer
     @State private var image: Image?
@@ -35,19 +41,27 @@ struct ContentView: View {
             }
         }
         .blendMode(image == nil ? .normal : .plusLighter)
-        .dropDestination(for: Data.self) { items, _ in
-            guard let imageData = items.first else { return false }
-            
-            Task.detached {
-                if let image = NSImage(data: imageData) {
-                    Task { @MainActor in
-                        self.container.hasPhoto = true
-                        self.image = Image(nsImage: image)
+        .conditional {
+            if #available(iOS 16.0, *) {
+                $0.dropDestination(for: Data.self) { items, _ in
+                    guard let imageData = items.first else { return false }
+                    
+                    Task.detached {
+                        if let image = PlatformImage(data: imageData) {
+                            Task { @MainActor in
+                                self.container.hasPhoto = true
+#if os(macOS)
+                                self.image = Image(nsImage: image)
+#else
+                                self.image = Image(uiImage: image)
+#endif
+                            }
+                        }
                     }
+                    
+                    return true
                 }
             }
-            
-            return true
         }
         .background {
             if let image {
@@ -55,7 +69,9 @@ struct ContentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             } else {
+                #if os(macOS)
                 VisualEffectView()
+                #endif
             }
         }
         .ignoresSafeArea()
@@ -65,5 +81,12 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(container: FireworksContainer())
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func conditional<V: View>(@ViewBuilder apply: @escaping (Self) -> V) -> some View {
+        apply(self)
     }
 }
