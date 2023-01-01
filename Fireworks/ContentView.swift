@@ -41,6 +41,7 @@ struct ContentView: View {
             }
         }
         .blendMode(image == nil ? .normal : .plusLighter)
+        .preferredColorScheme(.dark)
         .conditional {
             if #available(iOS 16.0, *) {
                 $0.dropDestination(for: Data.self) { items, _ in
