@@ -43,25 +43,8 @@ struct ContentView: View {
         .blendMode(image == nil ? .normal : .plusLighter)
         .preferredColorScheme(.dark)
         .conditional {
-            if #available(iOS 16.0, *) {
-                $0.dropDestination(for: Data.self) { items, _ in
-                    guard let imageData = items.first else { return false }
-                    
-                    Task.detached {
-                        if let image = PlatformImage(data: imageData) {
-                            Task { @MainActor in
-                                self.container.hasPhoto = true
-#if os(macOS)
-                                self.image = Image(nsImage: image)
-#else
-                                self.image = Image(uiImage: image)
-#endif
-                            }
-                        }
-                    }
-                    
-                    return true
-                }
+            if #available(iOS 16.0, macOS 13.0, *) {
+                $0.dropDestination(for: Data.self, action: handleDrop(items:location:))
             }
         }
         .background {
@@ -70,12 +53,27 @@ struct ContentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             } else {
-                #if os(macOS)
+#if os(macOS)
                 VisualEffectView()
-                #endif
+#endif
             }
         }
         .ignoresSafeArea()
+    }
+    
+    private func handleDrop(items: [Data], location: CGPoint) -> Bool {
+        guard let imageData = items.first else { return false }
+        
+        Task.detached {
+            if let image = PlatformImage(data: imageData) {
+                Task { @MainActor in
+                    self.container.hasPhoto = true
+                    self.image = Image(platformImage: image)
+                }
+            }
+        }
+        
+        return true
     }
 }
 
@@ -89,5 +87,15 @@ extension View {
     @ViewBuilder
     func conditional<V: View>(@ViewBuilder apply: @escaping (Self) -> V) -> some View {
         apply(self)
+    }
+}
+
+extension Image {
+    init(platformImage: PlatformImage) {
+#if os(macOS)
+        self.init(nsImage: platformImage)
+#else
+        self.init(uiImage: platformImage)
+#endif
     }
 }

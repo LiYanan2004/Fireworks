@@ -23,17 +23,29 @@ struct FireworksApp: App {
             }
             .keyboardShortcut(.upArrow)
         }
-        #if os(macOS)
-        Window("Firworks", id: "MAIN") {
-            ContentView(container: container)
-        }
-        .commands { commands }
-        .windowStyle(.hiddenTitleBar)
-        #else
+#if os(macOS)
+        conditionalWindowScene()
+            .commands { commands }
+            .windowStyle(.hiddenTitleBar)
+#else
         WindowGroup {
             ContentView(container: container)
         }
         .commands { commands }
-        #endif
+#endif
     }
+    
+#if os(macOS)
+    func conditionalWindowScene() -> some Scene {
+        if #available(macOS 13.0, *) {
+            return Window("Firworks", id: "MAIN") {
+                ContentView(container: container)
+            }
+        } else {
+            return WindowGroup {
+                ContentView(container: container)
+            }
+        }
+    }
+#endif
 }
